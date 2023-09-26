@@ -2,6 +2,10 @@ ion-item {
     --padding-start: 0;
 }
 
+.pos1 {
+    width: 50%;
+}
+
 ion-card {
     --background: #b6e396;
     --color: #deca7c;
@@ -9,4 +13,17 @@ ion-card {
 
 ion-card-title {
     --color: black;
+}
+
+ion-title {
+    --ion-font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Roboto', sans-serif;
+    --color: green;
+}
+
+:root {
+    --ion-background-color: white;
+}
+
+ion-toolbar {
+    --color: white;
 }
