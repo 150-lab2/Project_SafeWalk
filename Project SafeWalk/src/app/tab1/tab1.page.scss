@@ -1,29 +1,37 @@
-ion-item {
-    --padding-start: 0;
+.card1 {
+    background-color: #E2E8C3;
+    text-align: left;
 }
 
-.pos1 {
-    width: 50%;
+.card2 {
+    background-color: #F5D5BE;
 }
 
-ion-card {
-    --background: #b6e396;
-    --color: #deca7c;
+.card3 {
+    background-color: #BED8F5;
+}
+
+.card4 {
+    background-color: #F0BEF5;
+}
+
+#imgs {
+    float: right;
+    position: static;
 }
 
 ion-card-title {
     --color: black;
+    font-weight: bold;
+    text-align: left;
 }
 
 ion-title {
     --ion-font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Roboto', sans-serif;
-    --color: green;
+    --color: yellow;
 }
 
-:root {
-    --ion-background-color: white;
-}
-
-ion-toolbar {
-    --color: white;
-}
+// td {
+//     width: 100%;
+//     height: 100%;
+// }

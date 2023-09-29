@@ -1,45 +1,54 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Safe Walk - When safety matters
+      <img src="assets/img/Asset 16.png" alt="SafeWalk logo" width="50px" height="50px">
+      afeWalk -- When Safety Matters
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="false">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <table>
+    <tr>
+      <td colspan="2">
+        <ion-card class="card1">
+          <ion-card-header>
+            <ion-card-title>Check Who Is Near Your Area</ion-card-title>
+          </ion-card-header>
+          <img id="imgs" src="assets/img/whonear.png" alt="Check Who Is Near" style="width:50%;height:50%">
+        </ion-card>
+      </td>
+    </tr>
 
-  <app-explore-container name="Home elements (to be added soon lol)"></app-explore-container>
+    <tr>
+      <td>
+        <ion-card class="card2">
+          <ion-card-header>
+            <ion-card-title>Current Trusted List</ion-card-title>
+          </ion-card-header>
+          <img id="imgs" src="assets/img/trustedList.png" alt="Check Who Is Near" style="width:50%;height:50%">
+        </ion-card>
+      </td>
+      <td>
+        <ion-card class="card3">
+          <ion-card-header>
+            <ion-card-title>Report Area</ion-card-title>
+          </ion-card-header>
+          <img id="imgs" src="assets/img/reportArea.png" alt="Report Area" style="width:50%;height:50%">
+        </ion-card>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <ion-card class="card4">
+          <ion-card-header>
+            <ion-card-title>Add/Remove Emergency Contacts</ion-card-title>
+          </ion-card-header>
+          <img id="imgs" src="assets/img/emergencyContact.png" alt="Check Who Is Near" style="width:50%;height:50%">
+        </ion-card>
+      </td>
+    </tr>
+
+  </table>
 </ion-content>
 
-<ion-card class="pos1">
-  <ion-card-header>
-    <ion-card-title>Check Who is Near Your Area</ion-card-title>
-    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-  </ion-card-header>
-
-  <ion-card-content>
-    Here's a small text description for the card content. Nothing more, nothing less.
-  </ion-card-content>
-
-  <ion-button fill="clear">Action 1</ion-button>
-  <ion-button fill="clear">Action 2</ion-button>
-</ion-card>
-
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Current Trusted List</ion-card-title>
-    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-  </ion-card-header>
-
-  <ion-card-content>
-    Here's a small text description for the card content. Nothing more, nothing less.
-  </ion-card-content>
-
-  <ion-button fill="clear">Action 1</ion-button>
-  <ion-button fill="clear">Action 2</ion-button>
-</ion-card>
