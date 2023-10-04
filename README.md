@@ -1,4 +1,6 @@
 # Project_SafeWalk
+first push 
+I am front end 
 
 Made a node.js folder. I added express.js to handle post and get requests.
 
