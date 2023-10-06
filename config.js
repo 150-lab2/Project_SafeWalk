@@ -1,10 +1,16 @@
-import { initializeApp } from 'firebase/app';
+const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
+const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
 
-const firebaseConfig = {
-    //sdk configuration not posted on git
-};
 
-const fb = initializeApp(firebaseConfig);
-const db = getFirestore(fb);
+const serviceAccount = require('./serviceAccountKey.json');
 
-module.exports.db = db;
+var admin = require("firebase-admin");
+
+initializeApp({
+    //credential: cert(serviceAccount)
+    credential: admin.credential.cert(serviceAccount)
+});
+
+const db = getFirestore();
+
+module.exports = db;
