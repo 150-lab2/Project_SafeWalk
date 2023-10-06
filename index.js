@@ -3,7 +3,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-//const db = require('./config.js');
+const db = require('./config.js');
 app.use(express.json());
 
 
@@ -17,6 +17,8 @@ app.post('/adduser', async(req, res) =>{
 
     const username = req.body.name;
     const password = req.body.password;
+
+
     res.send(`The password is ${username} and ${password}`);
 });
 

@@ -13,3 +13,6 @@ A post request is set at the moment to test out posts.
 A REST file is includes to test out the post and get requests.
 
 If you want to run, use 'node index.js'. 
+
+
+something new
