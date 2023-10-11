@@ -20,6 +20,66 @@ app.get('/', (req, res) => {
 });
 
 
+
+
+app.post('/signup', async(req, res) =>{
+    
+    //needs an email, password(not safe, do not use a real pass), username.
+    
+
+    const username = req.body.username;
+    const email =  req.body.email;
+    const password = req.body.password;
+
+    const data = {
+        username: username,
+        email: email,
+        password: password
+    }
+
+    const useraccounts = await db.collection('users_test').doc(`${username}`).set(data);
+    
+
+});
+
+app.post('/addcontact', async(req, res)=>{
+
+    const name = req.body.name;
+    const phoneNumber = req.body.phoneNumber;
+    const email = req.body.email;
+
+    
+
+    const data = {
+        name: name,
+        phone_number: phoneNumber,
+        email: email
+    }
+    const userinfo = {
+        contacts: data
+    }
+
+    const useraccounts = await db.collection('users_test').doc('jeff').set(userinfo);
+    res.send('sent');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//TEST CODE
+
 app.post('/adduser', async(req, res) =>{
 //I will add user account from post.
     const username = req.body.name;
@@ -38,13 +98,27 @@ app.post('/adduser', async(req, res) =>{
 
 app.get('/getusers', async(req, res) => {
 
-    const user = db.collection('users').doc('alovelace');
+    //const user = db.collection('users_test').doc('alfredo_account');
+    const user = db.doc('users_test/alfredo_account');
     const doc = await user.get();
 
     res.send(doc.data());
 });
 
 
+
+app.get('/test/:token/:id',(req, res) =>{
+    console.log(req.params);
+});
+
+//signup
+/*
+app.post('/signup/', async (req, res)=>{
+
+
+
+});
+*/
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
