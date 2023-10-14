@@ -13,4 +13,20 @@ export class AuthService {
     }
     return false;
   }
+
+  async getUsers(){
+
+    try {
+      const res = await fetch('kdakdaskdn');
+      if(!res.ok) throw new Error(`daijdalsdl`)
+
+      return await res.json()
+      
+    } catch (error) {
+      // show user err message
+    }
+
+
+
+  }
 }

@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,16 +12,22 @@ import { AuthService } from '../auth.service';
 export class LoginPage {
   username: string = '';
   password: string = '';
+  data: []= [];
 
-  constructor(private authService: AuthService, private router: Router) {}
+  //$observ: Observable
 
-  login() {
-    if (this.authService.login(this.username, this.password)) {
-      // Navigate to the tabs page after successful login
-      this.router.navigate(['/tabs']);
-    } else {
-      // Display an error message or handle authentication failure
-      console.log('Login failed');
-    }
+  posttData: any = {name: '', password: ''};
+
+  constructor(private http: HttpClient) { }
+
+  postData() {
+    this.http.post('http://localhost:3000/login', this.posttData).subscribe(
+      (response) => {
+        console.log('Data posted successfully:', response);
+      },
+      (error) => {
+        console.error('Error posting data:', error);
+      }
+    );
   }
 }

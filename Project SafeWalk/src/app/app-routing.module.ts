@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-//import { LoginexammplePage } from './loginexample/loginexample-routing.module'; // Import your login component
-import { TabsPage } from './tabs/tabs.page'; // Import your tabs page component
+import { TabsPage } from './tabs/tabs.page'; 
 import { Router } from '@angular/router';
 
 
 
 const routes: Routes = [
   {
-    path: 'login', // Define a route for the login page
+    path: 'login', // Login page route
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'tabs', // Define a route for the tabs page
+    path: 'tabs', // Tabs module route
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
   },
   { 
     path: '', 
-    redirectTo: 'login', // Set the initial route to the login page
+    redirectTo: 'login', // When app is first loaded, displays login page first. 
     pathMatch: 'full' 
   }
 ];

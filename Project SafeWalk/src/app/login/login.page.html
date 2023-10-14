@@ -7,13 +7,13 @@
 <ion-content>
   <ion-item>
     <ion-label position="floating">Username</ion-label>
-    <ion-input [(ngModel)]="username" type="text"></ion-input>
+    <ion-input [(ngModel)]="posttData.name" name="name"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating">Password</ion-label>
-    <ion-input [(ngModel)]="password" type="password"></ion-input>
+    <ion-input [(ngModel)]="posttData.password" name="password"></ion-input>
   </ion-item>
 
-  <ion-button expand="full" (click)="login()">Login</ion-button>
+  <ion-button expand="full" (click)="postData()">Login</ion-button>
 </ion-content>

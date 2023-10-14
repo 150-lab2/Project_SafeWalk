@@ -8,47 +8,55 @@
 </ion-header>
 
 <ion-content>
-  <table>
-    <tr>
-      <td colspan="2">
-        <ion-card class="card1">
-          <ion-card-header>
-            <ion-card-title>Check Who Is Near Your Area</ion-card-title>
-          </ion-card-header>
-          <img id="imgs" src="assets/img/whonear.png" alt="Check Who Is Near" style="width:50%;height:50%">
-        </ion-card>
-      </td>
-    </tr>
+  <div class="card-container">
+    <ion-card class="card1">
+      <ion-card-header>
+        <ion-card-title>Check Who Is Near Your Area</ion-card-title>
+      </ion-card-header>
+      <img id="imgs" src="assets/img/whonear.png" alt="Check Who Is Near" class="card-image">
+    </ion-card>
+  </div>
 
-    <tr>
-      <td>
-        <ion-card class="card2">
-          <ion-card-header>
-            <ion-card-title>Current Trusted List</ion-card-title>
-          </ion-card-header>
-          <img id="imgs" src="assets/img/trustedList.png" alt="Check Who Is Near" style="width:50%;height:50%">
-        </ion-card>
-      </td>
-      <td>
-        <ion-card class="card3">
-          <ion-card-header>
-            <ion-card-title>Report Area</ion-card-title>
-          </ion-card-header>
-          <img id="imgs" src="assets/img/reportArea.png" alt="Report Area" style="width:75%;height:50%">
-        </ion-card>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <ion-card class="card4">
-          <ion-card-header>
-            <ion-card-title>Add/Remove Emergency Contacts</ion-card-title>
-          </ion-card-header>
-          <img id="imgs" src="assets/img/emergencyContact.png" alt="Check Who Is Near" style="width:50%;height:50%">
-        </ion-card>
-      </td>
-    </tr>
+  <div class="middle-row">
+    <ion-card class="card2">
+      <ion-card-header>
+        <ion-card-title>Current Trusted List</ion-card-title>
+      </ion-card-header>
+      <img id="imgs" src="assets/img/trustedList.png" alt="Current Trusted List" style="width: 100%; height: 50%">
+    </ion-card>
 
-  </table>
+    <ion-card class="card3">
+      <ion-card-header>
+        <ion-card-title>Report Area</ion-card-title>
+      </ion-card-header>
+      <img id="imgs" src="assets/img/reportArea.png" alt="Report Area" style="width: 100%; height: 50%">
+    </ion-card>
+  </div>
+
+  <div class="card-container">
+    <ion-card class="card4">
+      <ion-card-header>
+        <ion-card-title>Add/Remove Emergency Contacts</ion-card-title>
+      </ion-card-header>
+      <img id="imgs" src="assets/img/emergencyContact.png" alt="Add/Remove Emergency Contacts" class="card-image">
+    </ion-card>
+  </div>
+  <!-- This is for the floating action button for emergency (SOS) button -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button class="sosBtn" color="light">
+      <ion-icon src="assets/img/Untitled-1.png" alt="Emergency Button" style="font-size: 24px"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button>
+        <ion-icon name="document"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="color-palette"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="globe"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>
 

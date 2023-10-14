@@ -12,11 +12,9 @@ app.get('/', (req, res) => {
     res.send('hello world')
 });
 
-app.post('/adduser', async(req, res) =>{
-
-
+app.post('/login', async(req, res) =>{
     const username = req.body.name;
-    const password = req.body.password;
+    const password = req.body.password; 
     res.send(`The password is ${username} and ${password}`);
 });
 
@@ -25,4 +23,8 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 });
 
+
+// yourUsername
+// yourPassword
+// 
 
