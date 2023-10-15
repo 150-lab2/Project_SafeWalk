@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { ViewChild } from '@angular/core';
-import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
 
 @Component({
   selector: 'app-login',
@@ -20,24 +16,38 @@ export class LoginPage {
   data: []= [];
 
   posttData: any = {email: '', password: ''};
+  postSignUp: any = {username: '', email: '', password: ''};
 
   constructor(private http: HttpClient, private router: Router) { }
   
 
-  postData() {                //chekcing if login is correct
+  postData() {                //checking if login is correct
     this.http.post('http://localhost:3000/login', this.posttData).subscribe(
       (response) => {
         console.log('Data posted successfully:', response);
         this.router.navigate(['/tabs']);              // routes to home page
       },
-      (error) => {            //prints out error if unsucessful login attempt is made.
+      (error) => {            //prints out error if unsuccessful login attempt is made.
         console.error('Error posting data:', error);
+        alert("Login Failed");
       }
     );
   }
 
-  isModalOpen = false;
+  postSignUpReq() {
+    this.http.post('http://localhost:3000/signup', this.postSignUp).subscribe(
+      (response) => {
+        console.log('Data posted successfully:', response);
+        this.router.navigate(['/tabs']);              // routes to home page
+      },
+      (error) => {            //prints out error if unsuccessful signup attempt is made.
+        console.error('Error posting data:', error);
+        alert("Sign Up Failed");
+      }
+    );
+  }
 
+  isModalOpen = false;        //opens up the sub window (modal) for sign up 
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
   }
