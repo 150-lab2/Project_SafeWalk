@@ -21,7 +21,7 @@ export class LoginPage {
   constructor(private http: HttpClient, private router: Router) { }
   
 
-  postData() {                //checking if login is correct
+  postData() {                //performs login functionality. Checking if login is correct
     this.http.post('http://localhost:3000/login', this.posttData).subscribe(
       (response) => {
         console.log('Data posted successfully:', response);
