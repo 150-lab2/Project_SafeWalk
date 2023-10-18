@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const {Filter, Where} = require('firebase-admin/firestore');
 
 const db = require("./config.js")
 const users = db.collection('users_test');
@@ -31,8 +32,9 @@ app.post('/signup', async(req, res) =>{
     const username = req.body.username;
     const email =  req.body.email;
     const password = req.body.password;
-
-    await users.where('username', '==', username).where('email', '==', email).get().then((snap) =>{
+    let orFilter = Filter.or(Filter.where('username', '==', username), Filter.where('email', '==', email));
+    
+    await users.where(orFilter).get().then((snap) =>{
         if(snap.empty){
             const data = {
                 username: username,
@@ -62,24 +64,59 @@ app.post('/login', async(req, res)=>{
     const password = req.body.password;
     var data;
     console.log({email, password});
+    var access = {access: false};
     
     
     await users.where('email', '==', email).where('password', '==', password).get().then((snap) =>{
         
         if(snap.empty){
-            console.log('1');
             msg = 'could not find email and password match';
         }
         else{
-            console.log('2');
+            access.access = true;
             data = snap.docs[0].data();
             msg = `you have logged in as ${snap.docs[0].data()['username']}`;
         }
     });
-    res.send({msg, data});
+    res.send({access, data});
 
 });
 
+app.post('/addcontact/:username', async(req, res) =>{
+    console.log(req.params);
+
+    username = req.params.username;
+    contact_name = req.body.name;
+    phone = req.body.phone;
+    relation = req.body.relation;
+
+    data = {
+        contact_name: contact_name,
+        phone: phone,
+        relation: relation
+    }
+
+    const doc = await db.collection('users_test').doc(`${username}`).collection('contacts').doc(`${contact_name}`).set(data);
+
+    res.send(`Contact ${contact_name} has been added to ${username}'s contact list`);
+    /*example code
+    //const user = db.collection('users_test').doc('alfredo_account');
+    //const user = db.doc('users_test/alfredo_account');
+    //const doc = await user.get();
+
+    const doc = await db.collection('users_test').doc('alfredo').collection('contacts').doc('dd').get();
+    
+    doc.forEach(collection => {
+        console.log('Found subcollection with id:', collection.id);
+      });
+      
+
+    console.log(doc.data());
+    */
+    
+
+
+});
 
 
 
@@ -194,7 +231,7 @@ app.get('/getusers', async(req, res) => {
 
 
 
-app.get('/test/:token/:id',(req, res) =>{
+app.get('/test/:token/',(req, res) =>{
     console.log(req.params);
 });
 
