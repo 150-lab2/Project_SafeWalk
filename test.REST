@@ -1,34 +1,24 @@
 
-GET http://localhost:3000/getusers
-###
+
 
 POST http://localhost:3000/signup HTTP/1.1
 content-type: application/json
 
 {
-    "username": "jeff",
-    "email": "jeff117@gmail.com",
-    "password": "123456"
+    "username": "hijrgrgrgriji",
+    "email": "newjinarggggggggggggggme@gmail.com",
+    "password": "30000000"
 }
 ###
-POST http://localhost:3000/addcontact HTTP/1.1
+POST http://localhost:3000/login HTTP/1.1
 content-type: application/json
 
 {
-    "name": "friend",
-    "email": "friend@gmail.com",
-    "phoneNumber": "555-555-1234"
-}
-
-
-###
-POST http://localhost:3000/adduser HTTP/1.1
-content-type: application/json
-
-{
-    "name": "alfredo",
+    "email": "what?@gmail.com",
     "password": "123456"
 }
 
 ###
-GET http://localhost:3000/test/1234/5678
+
+GET http://localhost:3000/test/12344 HTTP/1.1
+content-type: application/json

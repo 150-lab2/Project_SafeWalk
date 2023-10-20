@@ -1,17 +1,22 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const {Filter, Where} = require('firebase-admin/firestore');
 
-const db = require("./config.js");
+const db = require("./config.js")
+const users = db.collection('users_test');
 
 //this will create a user "alfredo_account", it is not added till /adduser.
 //collection 'users_test' is where i am holding user accounts to test out.
 //feel free to make your own collection.
 
 
-const user = db.collection('users_test').doc('alfredo_account');
+//const user = db.collection('users_test').doc('alfredo_account');
 app.use(express.json());
-
+app.use(cors());
+app.use(bodyParser.json());
 
 
 
@@ -23,6 +28,103 @@ app.get('/', (req, res) => {
 
 
 app.post('/signup', async(req, res) =>{
+    var msg = '';
+    const username = req.body.username;
+    const email =  req.body.email;
+    const password = req.body.password;
+    let orFilter = Filter.or(Filter.where('username', '==', username), Filter.where('email', '==', email));
+    
+    await users.where(orFilter).get().then((snap) =>{
+        if(snap.empty){
+            const data = {
+                username: username,
+                email: email,
+                password: password
+            }
+            db.doc(`users_test/${username}`).set(data);
+            msg = 'user has signed up';
+
+        }
+        else{
+
+            msg = 'username or email already taken';
+        }
+    });
+    
+    
+    res.send({msg});
+
+
+});
+
+app.post('/login', async(req, res)=>{
+    
+    var msg = ''
+    const email = req.body.email;
+    const password = req.body.password;
+    var data;
+    console.log({email, password});
+    var access = {access: false};
+    
+    
+    await users.where('email', '==', email).where('password', '==', password).get().then((snap) =>{
+        
+        if(snap.empty){
+            msg = 'could not find email and password match';
+        }
+        else{
+            access.access = true;
+            data = snap.docs[0].data();
+            msg = `you have logged in as ${snap.docs[0].data()['username']}`;
+        }
+    });
+    res.send({access, data});
+
+});
+
+app.post('/addcontact/:username', async(req, res) =>{
+    console.log(req.params);
+
+    username = req.params.username;
+    contact_name = req.body.name;
+    phone = req.body.phone;
+    relation = req.body.relation;
+
+    data = {
+        contact_name: contact_name,
+        phone: phone,
+        relation: relation
+    }
+
+    const doc = await db.collection('users_test').doc(`${username}`).collection('contacts').doc(`${contact_name}`).set(data);
+
+    res.send(`Contact ${contact_name} has been added to ${username}'s contact list`);
+    /*example code
+    //const user = db.collection('users_test').doc('alfredo_account');
+    //const user = db.doc('users_test/alfredo_account');
+    //const doc = await user.get();
+
+    const doc = await db.collection('users_test').doc('alfredo').collection('contacts').doc('dd').get();
+    
+    doc.forEach(collection => {
+        console.log('Found subcollection with id:', collection.id);
+      });
+      
+
+    console.log(doc.data());
+    */
+    
+
+
+});
+
+
+
+
+/*
+
+
+app.post('/signup', async(req, res) =>{
     
     //needs an email, password(not safe, do not use a real pass), username.
     
@@ -31,6 +133,7 @@ app.post('/signup', async(req, res) =>{
     const email =  req.body.email;
     const password = req.body.password;
 
+    
     const data = {
         username: username,
         email: email,
@@ -59,7 +162,7 @@ app.post('/addcontact', async(req, res)=>{
         contacts: data
     }
 
-    const useraccounts = await db.collection('users_test').doc('jeff').set(userinfo);
+    const useraccounts = await db.collection('users_test').doc('jeff').update(userinfo);
     res.send('sent');
 });
 
@@ -82,6 +185,9 @@ app.post('/addcontact', async(req, res)=>{
 
 app.post('/adduser', async(req, res) =>{
 //I will add user account from post.
+    //console.log(res.body);
+
+
     const username = req.body.name;
     const password = req.body.password;
 
@@ -94,30 +200,41 @@ app.post('/adduser', async(req, res) =>{
     
 
     res.send(`The username ${username} and ${password} are saved into the firebase db`);
+    //res.send("wheefefe");
 });
+
+
+
+
+
+
+
 
 app.get('/getusers', async(req, res) => {
 
     //const user = db.collection('users_test').doc('alfredo_account');
     const user = db.doc('users_test/alfredo_account');
     const doc = await user.get();
-
+    
     res.send(doc.data());
+    //res.send("hello");
+
 });
 
 
 
-app.get('/test/:token/:id',(req, res) =>{
+
+
+
+
+
+
+
+
+app.get('/test/:token/',(req, res) =>{
     console.log(req.params);
 });
 
-//signup
-/*
-app.post('/signup/', async (req, res)=>{
-
-
-
-});
 */
 
 app.listen(port, () => {
