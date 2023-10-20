@@ -6,7 +6,7 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
+<!-- card for checking who is near the area -->
 <ion-content>
   <div class="card-container">
     <ion-card class="card1">
@@ -16,7 +16,7 @@
       <img id="imgs" src="assets/img/whonear.png" alt="Check Who Is Near" class="card-image">
     </ion-card>
   </div>
-
+  <!-- Check the current trusted list functionality -->
   <div class="middle-row">
     <ion-card class="card2">
       <ion-card-header>
@@ -24,7 +24,7 @@
       </ion-card-header>
       <img id="imgs" src="assets/img/trustedList.png" alt="Current Trusted List" style="width: 100%; height: 50%">
     </ion-card>
-
+    <!-- Report the current area card. -->
     <ion-card class="card3">
       <ion-card-header>
         <ion-card-title>Report Area</ion-card-title>
@@ -32,7 +32,7 @@
       <img id="imgs" src="assets/img/reportArea.png" alt="Report Area" style="width: 100%; height: 50%">
     </ion-card>
   </div>
-
+  <!-- To add/remove emergency contacts -->
   <div class="card-container">
     <ion-card class="card4">
       <ion-card-header>
@@ -41,22 +41,12 @@
       <img id="imgs" src="assets/img/emergencyContact.png" alt="Add/Remove Emergency Contacts" class="card-image">
     </ion-card>
   </div>
+
   <!-- This is for the floating action button for emergency (SOS) button -->
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="getLocation()">   <!--calls function to get latitude and longitude-->
     <ion-fab-button class="sosBtn" color="light">
       <ion-icon src="assets/img/Untitled-1.png" alt="Emergency Button" style="font-size: 24px"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button>
-        <ion-icon name="document"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button>
-        <ion-icon name="color-palette"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button>
-        <ion-icon name="globe"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
   </ion-fab>
 </ion-content>
 

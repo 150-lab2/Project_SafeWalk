@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@capacitor/geolocation": "^5.0.6"
+  }
+}

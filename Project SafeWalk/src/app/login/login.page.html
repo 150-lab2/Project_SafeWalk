@@ -4,6 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- starts the content of the page-->
 <ion-content>
     <img id="imgs" src="assets/img/footprint.png">
   
@@ -25,7 +26,7 @@
 <div class="ion-text-center">
   <h6>Don't have an account? <u (click)="setOpen(true)">Sign Up</u></h6>
 </div>
-<!-- This section below brings up the modal (sub window) that allows the user to sign up.-->
+<!-- This section below brings up the modal (sub window) that allows the user to sign up-->
   <ion-modal [isOpen]="isModalOpen">
     <ng-template>
       <ion-header>
@@ -42,7 +43,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">First Name</ion-label>
-                  <ion-input [(ngModel)]="posttData.password" name="Fname"></ion-input>
+                  <ion-input [(ngModel)]="postSignUp.Fname" name="Fname"></ion-input>
                 </ion-item>
               </ion-col>
               <ion-col>
@@ -83,7 +84,7 @@
         </div>
         <p>
           By clicking Sign Up you agree to our Terms. Learn how we collect, use and share in our Data Policy 
-          and how we use cookies and similar technology in out Cookie Policy. 
+          and how we use cookies and similar technology in our Cookie Policy. 
         </p>
       </ion-content>
     </ng-template>
