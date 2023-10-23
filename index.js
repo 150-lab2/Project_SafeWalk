@@ -4,16 +4,9 @@ const port = 3000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const {Filter, Where} = require('firebase-admin/firestore');
-
 const db = require("./config.js")
 const users = db.collection('users_test');
 
-//this will create a user "alfredo_account", it is not added till /adduser.
-//collection 'users_test' is where i am holding user accounts to test out.
-//feel free to make your own collection.
-
-
-//const user = db.collection('users_test').doc('alfredo_account');
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
@@ -60,7 +53,7 @@ app.post('/signup', async(req, res) =>{
 app.post('/login', async(req, res)=>{
     
     var msg = ''
-    const email = req.body.email;
+    const email = req.body.emaill;
     const password = req.body.password;
     var data;
     console.log({email, password});
@@ -82,10 +75,12 @@ app.post('/login', async(req, res)=>{
 
 });
 
+//:username, is the main user who we want to add contacts too.
 app.post('/addcontact/:username', async(req, res) =>{
     console.log(req.params);
 
     username = req.params.username;
+    //contact name will be set as the contact id.
     contact_name = req.body.name;
     phone = req.body.phone;
     relation = req.body.relation;
@@ -97,7 +92,6 @@ app.post('/addcontact/:username', async(req, res) =>{
     }
 
     const doc = await db.collection('users_test').doc(`${username}`).collection('contacts').doc(`${contact_name}`).set(data);
-
     res.send(`Contact ${contact_name} has been added to ${username}'s contact list`);
     /*example code
     //const user = db.collection('users_test').doc('alfredo_account');
@@ -106,6 +100,7 @@ app.post('/addcontact/:username', async(req, res) =>{
 
     const doc = await db.collection('users_test').doc('alfredo').collection('contacts').doc('dd').get();
     
+    retrieves each contact name in the contact list
     doc.forEach(collection => {
         console.log('Found subcollection with id:', collection.id);
       });
@@ -115,6 +110,15 @@ app.post('/addcontact/:username', async(req, res) =>{
     */
     
 
+
+});
+
+app.post('/emergency', async(req, res)=>{
+
+    latitude = req.body.latitude;
+    longitude = req.body.longitude;
+
+    res.send(`server has recieved latitude:${latitude} and longitude: ${longitude}`);
 
 });
 
