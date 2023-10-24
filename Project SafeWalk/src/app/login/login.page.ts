@@ -15,7 +15,7 @@ export class LoginPage {
   password: string = '';
   data: []= [];
 
-  posttData: any = {email: '', password: ''};
+  posttData: any = {emaill: '', password: ''};
   postSignUp: any = {username: '', email: '', password: ''};
 
   constructor(private http: HttpClient, private router: Router) { }
