@@ -11,9 +11,6 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class Tab1Page {
-  //latitude: string = '';
-  //longitude: string = '';
-
   location: any = {latitude: '', logitude: ''};
 
   constructor(private http: HttpClient) {}

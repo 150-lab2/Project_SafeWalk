@@ -22,6 +22,7 @@ log.txt
 /www
 /platforms
 /plugins
+/environments
 
 # Compiled output
 /dist

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
 import { HttpClient } from '@angular/common/http';
+import { LoginService } from 'src/app/providers/services/login-service';
+
 
 @Component({
   selector: 'app-login',
@@ -18,8 +19,12 @@ export class LoginPage {
   posttData: any = {emaill: '', password: ''};
   postSignUp: any = {username: '', email: '', password: ''};
 
-  constructor(private http: HttpClient, private router: Router) { }
-  
+  constructor(private http: HttpClient, private router: Router, public loginService: LoginService) { }
+
+
+  ionViewDidEnter() {
+    this.loginService.initialize();
+  }
 
   postData() {                //performs login functionality. Checking if login is correct
     this.http.post('http://localhost:3000/login', this.posttData).subscribe(
@@ -34,7 +39,7 @@ export class LoginPage {
     );
   }
 
-  postSignUpReq() {
+  postSignUpReq() {           // Sign Up POST request
     this.http.post('http://localhost:3000/signup', this.postSignUp).subscribe(
       (response) => {
         console.log('Data posted successfully:', response);
