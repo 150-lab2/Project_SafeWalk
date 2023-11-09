@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use(cors({ origin: '*' }));
 
 
 app.get('/', (req, res) => {
@@ -51,7 +52,7 @@ app.post('/signup', async(req, res) =>{
 });
 
 app.post('/login', async(req, res)=>{
-    
+    console.log("what");
     var msg = ''
     const email = req.body.emaill;
     const password = req.body.password;
@@ -71,6 +72,7 @@ app.post('/login', async(req, res)=>{
             msg = `you have logged in as ${snap.docs[0].data()['username']}`;
         }
     });
+    
     res.send({access, data});
 
 });
@@ -118,11 +120,28 @@ app.post('/emergency', async(req, res)=>{
     latitude = req.body.latitude;
     longitude = req.body.longitude;
 
-    res.send(`server has recieved latitude:${latitude} and longitude: ${longitude}`);
-
+    console.log(`server has recieved latitude:${latitude} and longitude: ${longitude}`);
+    res.send({latitude,longitude});
 });
 
+app.post('/pushtest', async(req, res)=>{
 
+    const message = {
+        notification: {
+          title: 'Notification Title',
+          body: 'Notification Body',
+        },
+        token: 'device-token',
+      };
+      
+      admin.messaging().send(message)
+        .then((response) => {
+          console.log('Successfully sent notification:', response);
+        })
+        .catch((error) => {
+          console.error('Error sending notification:', error);
+        });
+});
 
 
 /*
