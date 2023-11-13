@@ -22,7 +22,9 @@
 
 <div class="ion-text-center">
   <ion-button class="button" color="success" expand="default" (click)="postData()">Sign In</ion-button>
-  <ion-button class="button" color="success" expand="default" (click)="loginService.loginViaGoogle()">Sign In With Google</ion-button>
+  <ion-button class="button" color="success" expand="default" (click)="loginService.loginViaGoogle()">
+    <ion-icon name="logo-google"></ion-icon>
+  </ion-button>
 </div>
 <div class="ion-text-center">
   <h6>Don't have an account? <u (click)="setOpen(true)">Sign Up</u></h6>
