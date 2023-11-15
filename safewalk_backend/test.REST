@@ -5,8 +5,8 @@ POST http://localhost:3000/signup HTTP/1.1
 content-type: application/json
 
 {
-    "username": "yang",
-    "email": "yang@gmail.com",
+    "username": "bang",
+    "email": "bang@gmail.com",
     "password": "123245"
 }
 ###
@@ -14,13 +14,13 @@ POST http://localhost:3000/login HTTP/1.1
 content-type: application/json
 
 {
-    "username": "what?@gmail.com",
-    "password": "123456"
+    "emaill": "bang@gmail.com",
+    "password": "123245"
 }
 
 ###
 
-POST http://localhost:3000/addcontact/sometjietj HTTP/1.1
+POST http://localhost:3000/addcontact/bang HTTP/1.1
 content-type: application/json
 
 {

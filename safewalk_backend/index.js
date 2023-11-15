@@ -3,9 +3,12 @@ const app = express();
 const port = 3000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const {Filter, Where} = require('firebase-admin/firestore');
+const {getFirestore, Filter, Where} = require('firebase-admin/firestore');
+
+
 const db = require("./config.js")
 const users = db.collection('users_test');
+
 
 
 app.use(express.json());
@@ -127,6 +130,16 @@ app.post('/pushtest', async(req, res)=>{
           console.error('Error sending notification:', error);
         });
 });
+
+
+
+
+
+
+
+
+
+
 
 
 app.listen(port, () => {

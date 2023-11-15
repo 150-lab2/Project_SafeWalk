@@ -14,4 +14,28 @@ initializeApp({
 const db = getFirestore();
 
 
+/*
+const registrationToken = "";
+
+const message = {
+    notification: {
+      title: 'Title of your notification',
+      body: 'Body of your notification',
+    },
+    data: {
+      key1: 'value1',
+      key2: 'value2',
+    },
+    token: registrationToken, // Specify the FCM token here
+  };
+
+admin.messaging().send(message)
+  .then((response) => {
+    console.log('Successfully sent message:', response);
+  })
+  .catch((error) => {
+    console.error('Error sending message:', error);
+  });
+*/
+
 module.exports = db;
