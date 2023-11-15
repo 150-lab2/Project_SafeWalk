@@ -1,4 +1,5 @@
 import { CapacitorConfig } from '@capacitor/cli';
+// import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',

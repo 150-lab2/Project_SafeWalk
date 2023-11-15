@@ -1,25 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { HttpClient } from '@angular/common/http';
+import { LoginService } from 'src/app/providers/services/login-service';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
+
 export class LoginPage {
+  email: string = '';
   username: string = '';
   password: string = '';
+  data: []= [];
 
-  constructor(private authService: AuthService, private router: Router) {}
+  posttData: any = {emaill: '', password: ''};
+  postSignUp: any = {username: '', email: '', password: ''};
 
-  login() {
-    if (this.authService.login(this.username, this.password)) {
-      // Navigate to the tabs page after successful login
-      this.router.navigate(['/tabs']);
-    } else {
-      // Display an error message or handle authentication failure
-      console.log('Login failed');
-    }
+  constructor(private http: HttpClient, private router: Router, public loginService: LoginService) { }
+
+
+  ionViewDidEnter() {
+    this.loginService.initialize();
+  }
+
+  postData() {                //performs login functionality. Checking if login is correct
+    this.http.post('http://localhost:3000/login', this.posttData).subscribe(
+      (response) => {
+        console.log('Data posted successfully:', response);
+        this.router.navigate(['/tabs']);              // routes to home page
+      },
+      (error) => {            //prints out error if unsuccessful login attempt is made.
+        console.error('Error posting data:', error);
+        alert("Login Failed");
+      }
+    );
+  }
+
+  postSignUpReq() {           // Sign Up POST request
+    this.http.post('http://localhost:3000/signup', this.postSignUp).subscribe(
+      (response) => {
+        console.log('Data posted successfully:', response);
+        this.router.navigate(['/tabs']);              // routes to home page
+      },
+      (error) => {            //prints out error if unsuccessful signup attempt is made.
+        console.error('Error posting data:', error);
+        alert("Sign Up Failed");
+      }
+    );
+  }
+
+  isModalOpen = false;        //opens up the sub window (modal) for sign up 
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
   }
 }
