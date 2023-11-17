@@ -15,7 +15,7 @@ const db = getFirestore();
 
 
 /*
-const registrationToken = "";
+const registrationToken = "dlHVpQTySfaR1isG4rfESz:APA91bHHNESe0X8k1wuymybY9m8GQviEJpGlle8V-12WEOHoVf0DnAA6A32QedVBIrrvtLm2M-cI6-I3q3RbGuImuXUVRc6UJGPs8yxcRWKuo4aP2_oTRve5DtTv5i5KwneZAt3zYLC8";
 
 const message = {
     notification: {
@@ -36,6 +36,15 @@ admin.messaging().send(message)
   .catch((error) => {
     console.error('Error sending message:', error);
   });
-*/
 
-module.exports = db;
+*/
+const messaging = admin.messaging();
+
+function sendFirebaseMessage(message) {
+  return messaging.send(message);
+}
+
+module.exports = {
+  sendFirebaseMessage,
+  db,
+};

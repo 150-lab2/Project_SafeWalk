@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const {getFirestore, Filter, Where} = require('firebase-admin/firestore');
 
 
-const db = require("./config.js")
+const {db, sendFirebaseMessage} = require("./config.js")
 const users = db.collection('users_test');
 
 
@@ -112,25 +112,36 @@ app.post('/emergency', async(req, res)=>{
     res.send({latitude,longitude});
 });
 
-app.post('/pushtest', async(req, res)=>{
+
+
+app.post('/pushToken', async (req, res) => {
+
+    const registrationToken = req.body.token;
+
 
     const message = {
         notification: {
-          title: 'Notification Title',
-          body: 'Notification Body',
+            title: 'EMERGENCY',
+            body: 'Your friend is in trouble',
         },
-        token: 'device-token',
-      };
-      
-      admin.messaging().send(message)
+        data: {
+            key1: 'longitude',
+            key2: 'latitude',
+        },
+        token: registrationToken,
+    };
+
+    // Use the sendFirebaseMessage function to send the message
+    sendFirebaseMessage(message)
         .then((response) => {
-          console.log('Successfully sent notification:', response);
+            console.log('Successfully sent message:', response);
+            res.send('Successfully sent message');
         })
         .catch((error) => {
-          console.error('Error sending notification:', error);
+            console.error('Error sending message:', error);
+            res.status(500).send('Error sending message');
         });
 });
-
 
 
 
