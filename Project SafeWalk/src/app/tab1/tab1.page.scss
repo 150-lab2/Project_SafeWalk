@@ -1,0 +1,86 @@
+.card1 {
+    background-color: #E2E8C3;
+    text-align: left;
+    width: 94%;
+    height: 131px;
+}
+
+.card2 {
+    background-color: #F5D5BE;
+    width: 90%;
+}
+
+.card3 {
+    background-color: #BED8F5;
+    width: 88%;
+}
+
+.card4 {
+    background-color: #F0BEF5;
+}
+
+#imgs {
+    float: right;
+    position: static;
+}
+
+ion-card-title {
+    --color: black;
+    font-weight: bold;
+    text-align: left;
+}
+
+ion-title {
+    --ion-font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Roboto', sans-serif;
+    --color: black;
+}
+
+.sosBtn {
+    width: 80px;
+    height: 80px;
+}
+
+ion-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .card-container {
+    width: 94%;
+    text-align: center;
+  }
+  
+  .middle-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 600px; /* Adjust the max-width as needed */
+    margin: 0 auto;
+  }
+  
+  ion-card {
+    background-color: var(--ion-card-background-color);
+    padding: 10px;
+    text-align: center; 
+    width: 100%;
+    max-width: none;
+  }
+  
+  .card-image {
+    max-width: 50%;
+    height: auto;
+  }
+  
+  ion-card-title {
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  
+  
+  
+  

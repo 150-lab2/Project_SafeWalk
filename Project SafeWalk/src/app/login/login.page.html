@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title><b>Sign In</b></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- starts the content of the page-->
+<ion-content>
+    <img id="imgs" src="assets/img/footprint.png">
+  
+
+  <ion-item class="center">
+    <h6>Please Sign in to continue</h6>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input [(ngModel)]="posttData.email" name="email"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Password</ion-label>
+    <ion-input [(ngModel)]="posttData.password" name="password"></ion-input>
+  </ion-item>
+
+<div class="ion-text-center">
+  <ion-button class="button" color="success" expand="default" (click)="postData()">Sign In</ion-button>
+  <ion-button class="button" color="success" expand="default" (click)="loginService.loginViaGoogle()">
+    <ion-icon name="logo-google"></ion-icon>
+  </ion-button>
+</div>
+<div class="ion-text-center">
+  <h6>Don't have an account? <u (click)="setOpen(true)">Sign Up</u></h6>
+</div>
+<!-- This section below brings up the modal (sub window) that allows the user to sign up -->
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title><b>Sign Up</b></ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">First Name</ion-label>
+                  <ion-input [(ngModel)]="postSignUp.Fname" name="Fname"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Last Name</ion-label>
+                  <ion-input [(ngModel)]="postSignUp.Lname" name="Lname"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Username</ion-label>
+                  <ion-input [(ngModel)]="postSignUp.username" name="username"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Email</ion-label>
+                  <ion-input [(ngModel)]="postSignUp.email" name="email"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Password</ion-label>
+                  <ion-input [(ngModel)]="postSignUp.password" name="password"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <div class="ion-text-center">
+          <ion-button class="button" color="success" expand="default" (click)="postSignUpReq()">Sign Up</ion-button>
+        </div>
+        <p>
+          By clicking Sign Up you agree to our Terms. Learn how we collect, use and share in our Data Policy 
+          and how we use cookies and similar technology in our Cookie Policy. 
+        </p>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
