@@ -14,4 +14,14 @@ initializeApp({
 const db = getFirestore();
 
 
-module.exports = db;
+const messaging = admin.messaging();
+
+//this is the function to send message with the token to cloud messaging.
+function sendFirebaseMessage(message) {
+  return messaging.send(message);
+}
+
+module.exports = {
+  sendFirebaseMessage,
+  db,
+};

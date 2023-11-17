@@ -3,9 +3,13 @@ const app = express();
 const port = 3000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const {Filter, Where} = require('firebase-admin/firestore');
-const db = require("./config.js")
+const {getFirestore, Filter, Where} = require('firebase-admin/firestore');
+
+
+const {db, sendFirebaseMessage} = require("./config.js")
 const users = db.collection('users_test');
+
+
 
 app.use(express.json());
 app.use(cors());
@@ -95,22 +99,6 @@ app.post('/addcontact/:username', async(req, res) =>{
 
     const doc = await db.collection('users_test').doc(`${username}`).collection('contacts').doc(`${contact_name}`).set(data);
     res.send(`Contact ${contact_name} has been added to ${username}'s contact list`);
-    /*example code
-    //const user = db.collection('users_test').doc('alfredo_account');
-    //const user = db.doc('users_test/alfredo_account');
-    //const doc = await user.get();
-
-    const doc = await db.collection('users_test').doc('alfredo').collection('contacts').doc('dd').get();
-    
-    retrieves each contact name in the contact list
-    doc.forEach(collection => {
-        console.log('Found subcollection with id:', collection.id);
-      });
-      
-
-    console.log(doc.data());
-    */
-    
 
 
 });
@@ -124,70 +112,38 @@ app.post('/emergency', async(req, res)=>{
     res.send({latitude,longitude});
 });
 
-app.post('/pushtest', async(req, res)=>{
+
+
+app.post('/pushToken', async (req, res) => {
+
+    const registrationToken = req.body.token;
+
 
     const message = {
         notification: {
-          title: 'Notification Title',
-          body: 'Notification Body',
+            title: 'EMERGENCY',
+            body: 'Your friend is in trouble',
         },
-        token: 'device-token',
-      };
-      
-      admin.messaging().send(message)
+        data: {
+            key1: 'longitude',
+            key2: 'latitude',
+        },
+        token: registrationToken,
+    };
+
+    // Use the sendFirebaseMessage function to send the message
+    sendFirebaseMessage(message)
         .then((response) => {
-          console.log('Successfully sent notification:', response);
+            console.log('Successfully sent message:', response);
+            res.send('Successfully sent message');
         })
         .catch((error) => {
-          console.error('Error sending notification:', error);
+            console.error('Error sending message:', error);
+            res.status(500).send('Error sending message');
         });
 });
 
 
-/*
-
-
-app.post('/signup', async(req, res) =>{
-    
-    //needs an email, password(not safe, do not use a real pass), username.
-    
-
-    const username = req.body.username;
-    const email =  req.body.email;
-    const password = req.body.password;
-
-    
-    const data = {
-        username: username,
-        email: email,
-        password: password
-    }
-
-    const useraccounts = await db.collection('users_test').doc(`${username}`).set(data);
-    
-
-});
-
-app.post('/addcontact', async(req, res)=>{
-
-    const name = req.body.name;
-    const phoneNumber = req.body.phoneNumber;
-    const email = req.body.email;
-
-    
-
-    const data = {
-        name: name,
-        phone_number: phoneNumber,
-        email: email
-    }
-    const userinfo = {
-        contacts: data
-    }
-
-    const useraccounts = await db.collection('users_test').doc('jeff').update(userinfo);
-    res.send('sent');
-});
 
 
 
@@ -196,69 +152,6 @@ app.post('/addcontact', async(req, res)=>{
 
 
 
-
-
-
-
-
-
-
-
-//TEST CODE
-
-app.post('/adduser', async(req, res) =>{
-//I will add user account from post.
-    //console.log(res.body);
-
-
-    const username = req.body.name;
-    const password = req.body.password;
-
-
-//this adds the user 'alredo_account'
-    await user.set({
-        username: username,
-        password: password 
-    });
-    
-
-    res.send(`The username ${username} and ${password} are saved into the firebase db`);
-    //res.send("wheefefe");
-});
-
-
-
-
-
-
-
-
-app.get('/getusers', async(req, res) => {
-
-    //const user = db.collection('users_test').doc('alfredo_account');
-    const user = db.doc('users_test/alfredo_account');
-    const doc = await user.get();
-    
-    res.send(doc.data());
-    //res.send("hello");
-
-});
-
-
-
-
-
-
-
-
-
-
-
-app.get('/test/:token/',(req, res) =>{
-    console.log(req.params);
-});
-
-*/
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
