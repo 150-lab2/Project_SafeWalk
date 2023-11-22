@@ -1,13 +1,13 @@
 # Project_SafeWalk
-first push 
-I am front end 
 
-run 'npm install' to install the node packages.
+CSCI 150/Project SafeWalk
 
-add serviceAccountKey.json to main directory to get access to database.
+Paramvir Toor - Project Manager\
+Alfredo Gonzalez - Backend Developer\
+Julian Lamont Prater - Frontend Developer\
+Aaron Anthony Cantu - Frontend Developer\
+Yengtaova Yuatongjerxiong - UX/UI\
+Mayuka Nozaki - Quality Assurance
 
-run 'node index.js' to start express server.
-
-test.REST includes post and get examples. Download extension from visual studio code.
-
+SafeWalk is a mobile application designed to improve user safety during commutes, especially in unfamiliar or unsafe environments. By offering real-time location tracking, emergency notifications, and user-friendly interfaces, the application empowers individuals to feel more secure when walking alone.
 
