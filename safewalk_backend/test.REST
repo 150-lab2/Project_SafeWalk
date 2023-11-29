@@ -6,6 +6,8 @@ content-type: application/json
 
 {
     "username": "fefefg@gmail.com",
+    "signInToken": "4jf4oijej",
+    "pushToken" : "eifjosjfe445",
     "email": "bang@gmail.com",
     "password": "123245"
 }
@@ -20,12 +22,12 @@ content-type: application/json
 
 ###
 
-POST http://localhost:3000/addcontact/bang HTTP/1.1
+POST http://localhost:3000/addcontact HTTP/1.1
 content-type: application/json
 
 {
-
-    "name" : "fonem",
+    "username" : "alfrdo117",
+    "contactUsername" : "fonem",
     "phone" : "555-555-1234",
     "relation": "gang"
     
@@ -36,18 +38,12 @@ POST http://localhost:3000/emergency HTTP/1.1
 content-type: application/json
 
 {
+    "username" : "alfredo117",
     "latitude" : "353536636636",
     "longitude" : "3633333333333"
     
 }
 
-###
-POST http://localhost:3000/pushToken HTTP/1.1
-content-type: application/json
 
-{
-    "token" : "9i99u9"
-
-}
 
 ###
