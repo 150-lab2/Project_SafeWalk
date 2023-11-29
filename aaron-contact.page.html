@@ -1,0 +1,51 @@
+<!-- aaron-contact.page.html -->
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Aaron's Contact List
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button expand="full" color="primary" (click)="toggleAddContactForm()">Add Contact</ion-button>
+
+  <!-- Display the form only when the addContactFormVisible is true -->
+  <form *ngIf="addContactFormVisible" #contactForm="ngForm" (ngSubmit)="addContact(contactForm)">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" name="name" ngModel required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Phone Number</ion-label>
+      <ion-input type="tel" name="phoneNumber" ngModel required></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" color="primary" type="submit">Add Contact</ion-button>
+  </form>
+
+  <table class="contact-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone Number</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Use *ngFor to iterate through the contact list and display each contact -->
+      <tr *ngFor="let contact of contactList">
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.phoneNumber }}</td>
+        <td>
+          <ion-button color="danger" (click)="removeContact(contact)">-</ion-button>
+          <ion-button color="success" (click)="callContact(contact)">
+            <ion-icon name="call"></ion-icon>
+          </ion-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ion-content>

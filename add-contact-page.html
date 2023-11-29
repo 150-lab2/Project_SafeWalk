@@ -1,0 +1,54 @@
+<!-- add-contact.page.html -->
+<ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        Add New Contact
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tab1"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        Add Contact
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <!-- Your add-contact content goes here -->
+  
+    <!-- Add the close button -->
+    <ion-button expand="full" color="danger" (click)="goToTab1()">Close</ion-button>
+  </ion-content>
+  
+  <ion-content [fullscreen]="true">
+    <ion-list>
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-input [(ngModel)]="contact.name" required></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Phone 1</ion-label>
+        <ion-input [(ngModel)]="contact.phone1" type="tel" required></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Phone 2 (Optional)</ion-label>
+        <ion-input [(ngModel)]="contact.phone2" type="tel"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>User Profile (Optional)</ion-label>
+        <ion-input [(ngModel)]="contact.userProfile"></ion-input>
+      </ion-item>
+    </ion-list>
+  
+    <ion-button expand="full" color="primary" (click)="saveContact()">Save</ion-button>
+  </ion-content>
+
+  
