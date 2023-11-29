@@ -103,35 +103,28 @@ app.post('/addcontact/:username', async(req, res) =>{
 
 });
 
+
+//emergency will grab the location of the user, it will search the contacts of the user and send those users a push notification
 app.post('/emergency', async(req, res)=>{
 
     latitude = req.body.latitude;
     longitude = req.body.longitude;
 
-    console.log(`server has recieved latitude:${latitude} and longitude: ${longitude}`);
-    res.send({latitude,longitude});
-});
+    const username = req.body.username;
 
-
-
-app.post('/pushToken', async (req, res) => {
-
-    const registrationToken = req.body.token;
-
-
+    //all tokens and message data is sent in this json.
     const message = {
         notification: {
             title: 'EMERGENCY',
             body: 'Your friend is in trouble',
         },
         data: {
-            key1: 'longitude',
-            key2: 'latitude',
+            longitude: longitude,
+            latitude: latitude,
         },
         token: registrationToken,
     };
 
-    // Use the sendFirebaseMessage function to send the message
     sendFirebaseMessage(message)
         .then((response) => {
             console.log('Successfully sent message:', response);
@@ -141,6 +134,24 @@ app.post('/pushToken', async (req, res) => {
             console.error('Error sending message:', error);
             res.status(500).send('Error sending message');
         });
+
+    
+
+    console.log(`server has recieved latitude:${latitude} and longitude: ${longitude}`);
+    res.send({latitude,longitude});
+});
+
+
+//this will take in a token and the username who has that token
+//I will insert the token into the the database of the user who logged in.
+
+app.post('/pushToken', async (req, res) => {
+
+    const registrationToken = req.body.token;
+    const username = req.body.username;
+
+    //will insert the registratin token to the user.
+    
 });
 
 
