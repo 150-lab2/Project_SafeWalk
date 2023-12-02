@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from 'src/app/providers/services/login-service';
 
 @Component({
   selector: 'app-tab4',
@@ -7,6 +8,6 @@ import { Component } from '@angular/core';
 })
 export class Tab4Page {
 
-  constructor() {}
+  constructor(public loginService: LoginService) {}
 
 }
