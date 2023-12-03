@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Account
+      Welcome, {{ user.name }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,11 +9,10 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Account Settings</ion-title>
+      <ion-title size="large">Welcome, {{ user.name }}</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <app-explore-container name="Account settings here soon"></app-explore-container>
-
-  <!-- <ion-button expand="full" (click)="loginService.logout()">Logout</ion-button> -->
+  <div class="ion-text-center" style="margin-top: 200px;">
+    <ion-button class="button" (click)="loginService.logout()">Logout</ion-button>
+  </div>
 </ion-content>

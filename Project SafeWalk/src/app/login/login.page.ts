@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from 'src/app/providers/services/login-service';
+import { LocalStorageService } from 'src/app/providers/services/local-storage-service';
 import { ModalController } from '@ionic/angular';
 
 interface LoginResponse {
@@ -26,7 +27,7 @@ export class LoginPage {
   postSignUp: any = {username: '', email: '', password: ''};    //signUp object
 
   constructor(private http: HttpClient, private router: Router, public loginService: LoginService, 
-    public modalController: ModalController ) { }                 // initializes the http, router, and modalController vars and LoginService class
+    public modalController: ModalController, private localStorageService: LocalStorageService ) { }                 // initializes the http, router, and modalController vars and LoginService class
 
 
   ionViewDidEnter() {

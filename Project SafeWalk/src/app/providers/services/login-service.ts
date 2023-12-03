@@ -9,17 +9,20 @@ import { environment } from "./../../../environments/environment";
 import { AccountService } from "./account-service";
 import { LocalStorageService } from "./local-storage-service";
 
+
+
 @Injectable({
     providedIn: 'root'
 })
 export class LoginService {
     isWeb = false;
     firebase: any;
+    userName: any;
     constructor(
         private userService: AccountService,
         private localStorageService: LocalStorageService,
         private platform: Platform,
-        private router: Router) {
+        private router: Router,) {
         this.isWeb = !(this.platform.is('android') || this.platform.is('ios'));
         this.firebase = initializeApp(environment.firebase);
     }
@@ -60,15 +63,47 @@ export class LoginService {
                     .then(async (s) => {
                         const access_token = await s.user.getIdToken();
                         await this.localStorageService.set(AppStorageKey.AccessToken, access_token);
+                        await this.localStorageService.set(AppStorageKey.UserName, user.givenName);  // Store the user's name in local storage
                     })
                     .catch((error) => {
                         console.log(error);
                     });
+                this.userName = user.givenName;
                 this.userService.login({ name: user.givenName, email: user.email, imageUrl: user.imageUrl });
+                console.log('Logged in!', user.email);
                 this.router.navigate(['/tabs']);
             }
         } catch (error) {
             console.log(error);
         }
     }
+
+    public async login() {
+        try {
+          // Sign in with Google
+          const googleUser = await GoogleAuth.signIn();
+      
+          // Get the ID token from the Google Sign-In result
+          const idToken = googleUser.authentication.idToken;
+      
+          // Create a credential object using the ID token
+          const credential = GoogleAuthProvider.credential(idToken);
+      
+          // Sign in to Firebase with the credential
+          const auth = getAuth(this.firebase);
+          const firebaseUserCredential = await signInWithCredential(auth, credential);
+      
+          // Get the Firebase user from the Firebase user credential
+          const firebaseUser = firebaseUserCredential.user;
+      
+          // Store the Firebase user's ID token in local storage
+          await this.localStorageService.set(AppStorageKey.AccessToken, await firebaseUser.getIdToken());
+      
+          // Return the Firebase user
+          return firebaseUser;
+        } catch (error) {
+          console.error('Error logging in', error);
+          throw error;
+        }
+      }
 }
