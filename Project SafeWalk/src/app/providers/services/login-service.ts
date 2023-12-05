@@ -8,6 +8,9 @@ import { AppPagePath, AppStorageKey } from "src/app/models/enums/app-constant";
 import { environment } from "./../../../environments/environment";
 import { AccountService } from "./account-service";
 import { LocalStorageService } from "./local-storage-service";
+import { GeolocationPosition } from '@capacitor/geolocation';
+import { Geolocation } from '@capacitor/geolocation';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -18,10 +21,11 @@ export class LoginService {
     isWeb = false;
     firebase: any;
     userName: any;
+    location: any = {email: '', latitude: '', logitude: ''};
     constructor(
         private userService: AccountService,
         private localStorageService: LocalStorageService,
-        private platform: Platform,
+        private platform: Platform, private http: HttpClient,
         private router: Router,) {
         this.isWeb = !(this.platform.is('android') || this.platform.is('ios'));
         this.firebase = initializeApp(environment.firebase);
@@ -71,6 +75,24 @@ export class LoginService {
                 this.userName = user.givenName;
                 this.userService.login({ name: user.givenName, email: user.email, imageUrl: user.imageUrl });
                 console.log('Logged in!', user.email);
+                this.location.email = user.email;
+                try {
+                    const coordinates: GeolocationPosition = await Geolocation.getCurrentPosition();
+                    this.location.latitude = coordinates.coords.latitude;
+                    this.location.longitude = coordinates.coords.longitude;
+                    this.http.post('http://localhost:3000/login', this.location).subscribe(       //POST method to backend to send lat and long
+                      (response) => {
+                        console.log('Response sent', response);
+                      },
+                      (error) => {            //prints out error if unsuccessful sending coordinates and email.
+                        console.error('Error posting data:', error);
+                        alert("Could not send coordinates and email");
+                      }
+                    );
+                    }
+                    catch (error) {
+                      console.log('could not send coordinates')
+                    }
                 this.router.navigate(['/tabs']);
             }
         } catch (error) {

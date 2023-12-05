@@ -15,7 +15,7 @@
     </ion-card>
   <!-- Check the current trusted list functionality -->
   <div class="middle-row">
-    <ion-card class="card2" (click)="setOpen1(true)">
+    <ion-card class="card2" (click)="showTrustedList()">
       <ion-card-header>
         <ion-card-title>Current Trusted List</ion-card-title>
       </ion-card-header>
@@ -36,7 +36,6 @@
       </ion-card-header>
       <img id="imgs" src="assets/img/emergencyContact.png" alt="Add/Remove Emergency Contacts" class="card-image">
     </ion-card>
-
 
   <!-- This is for the floating action button for emergency (SOS) button -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="getLocation()">   <!--calls function to get latitude and longitude-->
@@ -60,7 +59,7 @@
         <ion-list>
           <ion-item>
             <ion-label position="floating">Contact name</ion-label>
-            <ion-input [(ngModel)]="addContact.name" required></ion-input>
+            <ion-input [(ngModel)]="addContact.contactUsername" required></ion-input>
           </ion-item>
       
           <ion-item>
@@ -94,7 +93,7 @@
         <ion-list>
           <ion-item *ngFor="let contact of contactList">
             <ion-label>
-              <h2>{{contact.name}}</h2>
+              <h2>{{contact.contact_name}}</h2>
               <p>{{contact.phone}}</p>
               <p>{{contact.relation}}</p>
             </ion-label>

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
+import 'firebase/messaging';
+import * as firebase from 'firebase/app';
+import { environment } from 'src/environments/environment'; // Adjust the path as necessary
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +13,19 @@ export class FcmService {
   isWeb = false;
   constructor(private router: Router,
     private platform: Platform) {
-    this.isWeb = !(this.platform.is('android') || this.platform.is('ios'));
+      this.isWeb = !(this.platform.is('android') || this.platform.is('ios'));
+
+      if (this.isWeb) {
+        firebase.initializeApp(environment.firebase);
+      }
   }
 
   initPush() {
-    if (!this.isWeb) {
+    if (this.isWeb) {
       this.registerPush();
     }
   }
+
 
   private async registerPush() {
     console.log("********** inside registerPush ***********");
