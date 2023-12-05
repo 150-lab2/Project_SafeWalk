@@ -16,8 +16,9 @@ POST http://localhost:3000/login HTTP/1.1
 content-type: application/json
 
 {
-    "emaill": "bang@gmail.com",
-    "password": "123245"
+    "email": "alfredo117@gmail.com",
+    "longitude": "-119.7702",
+    "latitude" : "36.7420"
 }
 
 ###
@@ -26,9 +27,9 @@ POST http://localhost:3000/addcontact HTTP/1.1
 content-type: application/json
 
 {
-    "username" : "alfrdo117",
-    "contactUsername" : "fonem",
-    "phone" : "555-555-1234",
+    "username" : "alfredo118@gmail.com",
+    "contactUsername" : "fmm",
+    "phone" : "555-555-oo34",
     "relation": "gang"
     
 }
@@ -44,6 +45,26 @@ content-type: application/json
     
 }
 
+###
 
+POST http://localhost:3000/getContacts HTTP/1.1
+content-type: application/json
+
+{
+    "email" : "julianprater@mail.fresnostate.edu"
+
+    
+}
 
 ###
+
+POST https://safewalk.azurewebsites.net/getLocations HTTP/1.1
+content-type: application/json
+
+{
+    "email" : "julianprater@mail.fresnostate.edu"
+
+}
+
+###
+
