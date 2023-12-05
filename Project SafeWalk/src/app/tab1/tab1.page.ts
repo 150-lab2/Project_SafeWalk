@@ -74,8 +74,7 @@ export class Tab1Page{
         (response) => {
           console.log('Retrieved List of Contacts!', response.emailArray);
           this.contactLocations = response.emailArray;
-          //this.Tab3Page.placeMarker(response.emailArray);
-          //this.router.navigate(['/tabs/tab3']);
+          this.router.navigate(['/tabs/tab3']);
         },
         (error) => {            //prints out error if unsuccessful sending coordinates.
           console.error('Error posting data:', error);
