@@ -48,9 +48,10 @@ export class Tab1Page{
     const coordinates: GeolocationPosition = await Geolocation.getCurrentPosition();
     this.location.latitude = coordinates.coords.latitude;
     this.location.longitude = coordinates.coords.longitude;
-    this.http.post('http://localhost:3000/emergency', this.location).subscribe(       //POST method to backend to send lat and long
+    this.http.post('https://safewalk.azurewebsites.net/emergency', this.location).subscribe(       //POST method to backend to send lat and long
       (response) => {
-        console.log('Emergency Response Sent', response);
+        console.log('Emergency Response Sent out to Contacts', response);
+        alert('Emergency Response Sent out to Contacts');
       },
       (error) => {            //prints out error if unsuccessful sending coordinates.
         console.error('Error posting data:', error);
@@ -65,26 +66,7 @@ export class Tab1Page{
 
   /* FUNCTIONS TO CONTROL THE SUB WINDOWS (MODALS) AND THEIR OPERATIONS BELOW */
   async CheckWhoIsNear() {
-    console.log("opening map on location tab");
-    console.log("creating pins for contacts");
-    try {
-      this.user = await this.accountService.getUser();
-      console.log(this.user.email);         //username is email of user
-      this.http.post<ApiResponse>('http://localhost:3000/getLocations', {email : this.user.email}).subscribe(       //POST method to backend to send lat and long
-        (response) => {
-          console.log('Retrieved List of Contacts!', response.emailArray);
-          this.contactLocations = response.emailArray;
-          this.router.navigate(['/tabs/tab3']);
-        },
-        (error) => {            //prints out error if unsuccessful sending coordinates.
-          console.error('Error posting data:', error);
-          alert("Could not send coordinates");
-        }
-      );
-      }
-      catch (error){
-        console.log('could not send coordinates')
-      }
+    this.router.navigate(['/tabs/tab3']);
   }
 
   async showTrustedList() {
@@ -94,7 +76,7 @@ export class Tab1Page{
     try {
       this.user = await this.accountService.getUser();
       console.log(this.user.email);         //username is email of user
-      this.http.post<ApiResponse>('http://localhost:3000/getContacts', {email : this.user.email}).subscribe(       //POST method to backend to send lat and long
+      this.http.post<ApiResponse>('https://safewalk.azurewebsites.net/getContacts', {email : this.user.email}).subscribe(       //POST method to backend to send lat and long
         (response) => {
           console.log('Retrieved List of Contacts!', response.data);
           console.log(response);
@@ -121,7 +103,7 @@ export class Tab1Page{
       this.user = await this.accountService.getUser();
       console.log(this.user.email);
       this.addContact.username = this.user.email;             //username is email of user
-      this.http.post('http://localhost:3000/addcontact', this.addContact).subscribe(       //POST method to backend to send lat and long
+      this.http.post('https://safewalk.azurewebsites.net/addcontact', this.addContact).subscribe(       //POST method to backend to send lat and long
         (response) => {
           console.log('Emergency Response Sent', response);
         },

@@ -37,7 +37,7 @@ export class Tab3Page implements OnInit {
   }
 
   async loadMap() {
-    const coordinates = await Geolocation.getCurrentPosition();
+    const coordinates = await Geolocation.getCurrentPosition({ enableHighAccuracy: true });
     this.cntr = new google.maps.LatLng(coordinates.coords.latitude, coordinates.coords.longitude);
     //console.log(this.cntr);
     let mapOptions = {
@@ -53,14 +53,14 @@ export class Tab3Page implements OnInit {
       position: this.cntr,
       map: this.map,
       icon: {
-        url: 'assets/img/Asset 14.png',
+        url: 'assets/img/Asset 15.png',
         scaledSize: new google.maps.Size(40, 70)
       }
     });
     try {
       this.user = await this.accountService.getUser();
       console.log(this.user.email);         //username is email of user
-      this.http.post<ApiResponse>('http://localhost:3000/getLocations', {email : this.user.email}).subscribe(       //POST method to backend to send lat and long
+      this.http.post<ApiResponse>('https://safewalk.azurewebsites.net/getLocations', {email : this.user.email}).subscribe(       //POST method to backend to send lat and long
         (response) => {
           console.log('Retrieved List of Contacts!', response.emailArray);
           this.contactLocations = response.emailArray;
