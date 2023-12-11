@@ -7,40 +7,101 @@
 </ion-header>
 <!-- card for checking who is near the area -->
 <ion-content>
-    <ion-card class="card1">
+    <ion-card class="card1" (click)="CheckWhoIsNear()">
       <ion-card-header>
         <ion-card-title>Check Who Is Near Your Area</ion-card-title>
       </ion-card-header>
       <img id="imgs" src="assets/img/whonear.png" alt="Check Who Is Near" class="card-image">
     </ion-card>
   <!-- Check the current trusted list functionality -->
-    <ion-card class="card2">
+  <div class="middle-row">
+    <ion-card class="card2" (click)="showTrustedList()">
       <ion-card-header>
         <ion-card-title>Current Trusted List</ion-card-title>
       </ion-card-header>
-      <img id="imgs" src="assets/img/trustedList.png" alt="Current Trusted List" style="width: 100%; height: 50%">
+      <img id="imgs" src="assets/img/trustedList.png" alt="Current Trusted List" class="card-image">
     </ion-card>
     <!-- Report the current area card. -->
-    <ion-card class="card3">
+    <ion-card class="card3" (click)="reportArea()">
       <ion-card-header>
         <ion-card-title>Report Area</ion-card-title>
       </ion-card-header>
-      <img id="imgs" src="assets/img/reportArea.png" alt="Report Area" style="width: 100%; height: 50%">
+      <img id="imgs" src="assets/img/reportArea.png" alt="Report Area" style="width: 100%; height: 70%;">
     </ion-card>
+  </div>
   <!-- To add/remove emergency contacts -->
-    <ion-card class="card4">
+    <ion-card class="card4" (click)="setOpen(true)">
       <ion-card-header>
-        <ion-card-title>Add/Remove Emergency Contacts</ion-card-title>
+        <ion-card-title>Add Emergency Contacts</ion-card-title>
       </ion-card-header>
       <img id="imgs" src="assets/img/emergencyContact.png" alt="Add/Remove Emergency Contacts" class="card-image">
     </ion-card>
 
-
   <!-- This is for the floating action button for emergency (SOS) button -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="getLocation()">   <!--calls function to get latitude and longitude-->
-    <ion-fab-button class="sosBtn" color="light">
-      <ion-icon src="assets/img/Untitled-1.png" alt="Emergency Button" style="font-size: 24px"></ion-icon>
+    <ion-fab-button class="sosBtn" color="danger">
+      <ion-icon name="warning" alt="Emergency Button" style="font-size: 40px"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <!-- This is the modal for adding and saving a contact -->
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title><b>Add Contact</b></ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Contact name</ion-label>
+            <ion-input [(ngModel)]="addContact.contactUsername" required></ion-input>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label position="floating">Phone</ion-label>
+            <ion-input [(ngModel)]="addContact.phone" type="tel" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Relation</ion-label>
+            <ion-input [(ngModel)]="addContact.relation" required></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-button expand="full" color="primary" (click)="saveContact()">Save</ion-button>
+    </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
+  <!-- This modal is meant to show the current trusted list -->
+  <ion-modal [isOpen]="isModalOpen1">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title><b>Current Trusted List</b></ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen1(false)">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-list>
+          <ion-item *ngFor="let contact of contactList">
+            <ion-label>
+              <h2>{{contact.contact_name}}</h2>
+              <p>{{contact.phone}}</p>
+              <p>{{contact.relation}}</p>
+            </ion-label>
+            <ion-button color="danger" (click)="removeContact(contact)">Delete</ion-button>
+          </ion-item>
+        </ion-list>
+    </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
 

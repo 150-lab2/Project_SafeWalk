@@ -9,6 +9,7 @@ export enum AppChannel {
 
 export enum AppStorageKey {
     AccessToken = 'access_token',
+    UserName = 'userName',
     IsDarkModeEnabled = 'IsDarkModeEnabled',
     CurrentUser = 'CurrentUser'
 }

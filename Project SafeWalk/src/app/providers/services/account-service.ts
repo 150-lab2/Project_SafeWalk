@@ -4,14 +4,21 @@ import { AppEvent, AppStorageKey } from 'src/app/models/enums/app-constant';
 import { IUserDetails } from 'src/app/models/user/user-details';
 import { LocalNotificationService } from './local-notification-service';
 
+
 @Injectable({
     providedIn: 'root'
 })
 export class AccountService {
     favorites: string[] = [];
+    private storageService: Storage | null = null;
 
-    constructor(public storage: Storage, private localNotificationService: LocalNotificationService) { }
+    constructor(public storage: Storage, private localNotificationService: LocalNotificationService) { this.init()}
 
+
+    async init() {
+        const storage = await this.storage.create();
+        this.storageService = storage;
+    }
     hasFavorite(sessionName: string): boolean {
         return (this.favorites.indexOf(sessionName) > -1);
     }
