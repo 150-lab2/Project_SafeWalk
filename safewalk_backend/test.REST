@@ -12,11 +12,11 @@ content-type: application/json
     "password": "123245"
 }
 ###
-POST http://localhost:3000/login HTTP/1.1
+POST http://localhost/login HTTP/1.1
 content-type: application/json
 
 {
-    "email": "alfredo117@gmail.com",
+    "email": "fresno@gmail.com",
     "longitude": "-119.7702",
     "latitude" : "36.7420"
 }
